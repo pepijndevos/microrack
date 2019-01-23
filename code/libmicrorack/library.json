@@ -1,0 +1,7 @@
+{
+  "name": "libMicrorack",
+  "keywords": "i2c",
+  "description": "Wire wrapper for microrack bus",
+  "frameworks": "arduino",
+  "platforms": "atmelavr"
+}
