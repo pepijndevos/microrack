@@ -28,15 +28,15 @@ void syncEvent() {
 }
 
 void slaveBegin(int address, int syncPin, struct port* sett, size_t setlen) {
-  Wire.begin(address);
-  Wire.onRequest(requestEvent);
-  Wire.onReceive(receiveEvent);
-  attachInterrupt(digitalPinToInterrupt(syncPin), syncEvent, RISING);
   value_buffer = (uint16_t*)calloc(setlen, sizeof(uint16_t));
   settings = sett;
   settings_length = setlen;
   for(unsigned int i=0; i<settings_length; i++) {
     value_buffer[i] = settings[i].value;
   }
+  Wire.begin(address);
+  Wire.onRequest(requestEvent);
+  Wire.onReceive(receiveEvent);
+  attachInterrupt(digitalPinToInterrupt(syncPin), syncEvent, RISING);
 }
 
