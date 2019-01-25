@@ -41,11 +41,15 @@ void setup() {
 }
 
 void loop() {
- unsigned int i = 0;
- while (true) {
    bitSet(PIND, SRCLK);
-   bitWrite(PORTD, RCLK, i&8);
+   bitSet(PIND, SRCLK);
+   bitSet(PIND, SRCLK);
+   bitSet(PIND, SRCLK);
+   bitSet(PIND, SRCLK);
+   bitSet(PIND, SRCLK);
+   bitSet(PIND, SRCLK);
+   bitSet(PIND, SRCLK);
+   //PIND |= (1U << SRCLK) | (1U << RCLK);
+   bitSet(PIND, RCLK);
    delayMicroseconds(mysettings[1].value);
-   i++;
- }
 }

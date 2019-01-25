@@ -18,7 +18,7 @@ void loop() {
   Serial.println(myport.name);
   uint16_t myval = readValue(21, 1);
   Serial.println(myval);
-  writeValue(21, 1, counter%1000);  
+  writeValue(21, 1, 1<<(counter%15));  
   //writeValue(21, 1, 0);  
   delay(1);
   digitalWrite(3, HIGH);
