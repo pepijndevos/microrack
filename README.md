@@ -1,6 +1,6 @@
 # Microrack
 
-The purpose of Microrack is to be compact, cheap, easy to prototype and electronically compatible with other CV/gate systems, specifically Eurorack.
+The purpose of Microrack is to be a modular synthesizer format that is compact, cheap, easy to prototype and electronically compatible with other CV/gate systems, specifically Eurorack.
 
 Microrack is a mixed analog/digital system, with primarily analog sound and digital control.
 It is based on a bus which provides power, I2C, synchronization, and analog lines.
