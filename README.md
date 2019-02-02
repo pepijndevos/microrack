@@ -43,20 +43,26 @@ I2C runs at 400KHz fast mode or higher. Pull-up resistors are on the base board.
 
 The I2C master contains a virtual patch bay that allows connecting digital control signals and set analog multiplexers. It transfers data between each slave according to this patch bay, and then rises the SYNC line.
 I2C slave devices should "hold" writes until a rising edge on the SYNC line, at which point they should be "commited". This is to ensure synchronous action throughout the system.
-The I2C protocol uses one-byte addresses to read and write registers. The register layout is as follows
 
-| Address | 1 byte | 2 bytes | 13 bytes |
+The I2C protocol uses one byte to indicate the port number, followed by 2 byte of data to be written, or a read transmission of up to 16 bytes.
+
+| Address | 2 byte | 1 bytes | 13 bytes |
 | --- | --- | --- | --- |
-| 0x00 | Number of ports | Reserved | Product name |
-| 0x10 | Type | Value | Port name |
-| 0x20 | Type | Value | Port name |
-| ...  | Type | Value | Port name |
-| 0xF0 | Type | Value | Port name |
+| 0x00 | Reserved | Number of ports | Product name |
+| 0x01 | Value | Type | Port name |
+| 0x02 | Value | Type | Port name |
+| ... | Value | Type | Port name |
+| 0xff | Value | Type | Port name |
 
-That is, the first 16 bytes contain the product information, and each subsequent 16 bytes describe an input/output port. There are a maximum of 15 ports, but the actual number of ports in use is described in 0x00. Product/Port name contains an UTF-8 string with a human-readable name for the port.
+That is, the first port of 16 bytes contains the product information, and each subsequent port contains 16 bytes that describe an input/output port. There is a maximum of 255 ports, but the actual number of ports in use is described in 0x00. Product/Port name contains an UTF-8 string with a human-readable name for the port.
 
 The type register contains flags that describe the data in the value register. Interpretation of this register is to be determined. Example: input/output, signned/unsigned/fixed-point/bitmask, and maybe unit? visual representation? category?
 
 ## Reference implementation
 
 This repository will host schematics and software for my implementation of the above.
+It cuttently contains
+
+* I2C master/slave Arduino library
+* Base board & power supply
+* LFSH Noise source
