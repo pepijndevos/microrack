@@ -16,14 +16,20 @@ void loop() {
   Serial.print(myport.type);
   Serial.print(" ");
   Serial.println(myport.name);
-  uint16_t myval = readValue(21, 1);
+  uint16_t myval = readValue(21, 2);
   Serial.println(myval);
   uint16_t pot = analogRead(A0);
-  writeValue(21, 1, pot<<6);  
-  //writeValue(21, 1, 0);  
+  if(pot > 50) {
+    pot -= 50;
+  } else {
+    pot = 0;
+  }
+  writeValue(21, 1, pot*2);
+  delay(1);
+  writeValue(21, 2, (7 << 1) | 1);  
   delay(1);
   digitalWrite(3, HIGH);
   delay(1);
   digitalWrite(3, LOW);
-  delay(500);
+  delay(10);
 }
